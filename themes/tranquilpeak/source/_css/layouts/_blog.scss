@@ -1,0 +1,38 @@
+#blog {
+    position: absolute;
+    top:      0;
+    left:     0;
+    width:    100%;
+    height:   100%;
+
+    .post {
+        ul, ol {
+          margin: 25.5px 0;
+        }
+
+        .button-container {
+            margin: 20px 0;
+
+            a {
+                display:      inline-block;
+                font-size:    20px;
+                margin:       20px 0;
+                min-width:    130px;
+                text-align:   center;
+
+                &:first-child {
+                  margin-right: 20px;
+                }
+            }
+        }
+    }
+
+    .post .post-content img, .postShorten img {
+        border:      #fff 8px solid;
+        border-radius: 3px;
+        box-shadow:    0 1px 4px rgba(0,0,0,0.15);
+        box-sizing:    border-box;
+        margin:        2px 2px 24px;
+    }
+
+}

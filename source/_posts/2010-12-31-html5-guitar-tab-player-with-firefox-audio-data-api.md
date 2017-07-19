@@ -1,0 +1,85 @@
+---
+layout: post
+title: Guitar Tab Player with the Firefox Audio Data API
+date: 2010-12-31 21:09:00
+comments: true
+categories:
+- JavaScript
+- HTML5
+---
+
+{% asset_img guitartabplayer_screenshot.jpg "Vexflow Guitar Tab Player" %}
+
+What if there was a standardized way to display interactive guitar tab on the web? And this guitar tab could be listened to and required no plugins to run, just a browser...
+
+I built a web-based guitar tab player using Firefox's Audio Data API and Vexflow. This proof of concept guitar tab player reads MusicXML files and dynamically generates tablature and audio using JavaScript.
+
+<!--more-->
+
+
+To view this demo you must be using Firefox 4 as your browser.
+
+
+{% raw %}
+<div class="button-container">
+  <a href="https://github.com/gregjopa/HTML5-Guitar-Tab-Player" class="btn btn--primary">Download</a>
+  <a href="http://gregjopa.me/code/html5/audio/tabplayer/" class="btn btn--primary">Demo</a>
+</div>
+{% endraw %}
+
+
+This tab player is very basic and can only play single notes. After seeing the audiodata.js project on GitHub ([https://github.com/notmasteryet/audiodata](https://github.com/notmasteryet/audiodata)) and viewing the score example with "Twinkle, Twinkle, Little Star" I was inspired to build this guitar tab player.
+
+## How it works
+
+MusicXML + Audio Data API + VexFlow = HTML5 Guitar Tab Player
+
+* __MusicXML__ - is a XML-based music notation format. It is supported by all the major music notation programs like Finale, Sibelius, and Guitar Pro. These notation programs include import/export functionality for reading and writing MusicXML. Recordare developed MusicXML ([http://www.musicxml.com/](http://www.musicxml.com/)). In my guitar tab app I used jQuery to parse through the MusicXML files.
+
+* __Audio Data API__ - the guys at Mozilla have done amazing work with creating an Audio Data API that can read and write raw audio with JavaScript ([https://wiki.mozilla.org/Audio_Data_API](https://wiki.mozilla.org/Audio_Data_API)). This Audio Data API is included in the Firefox 4 Beta. In my guitar tab app I used the audiodata.js library which encapsulates the Audio Data API methods.
+
+* __VexFlow__ - is an open-source web-based music notation rendering API based on the HTML5 canvas element. It is written completely in JavaScript and provides an easy syntax for writing guitar tab [http://www.vexflow.com](http://www.vexflow.com/)).
+
+
+## Future Updates
+
+Here is a list of updates I plan on making to this HTML5 Guitar Tab Player. I have uploaded this code to GitHub in case anyone else would like to help make this tab player better.
+
+1. __Utilize DSP__ - right now the audio sounds like it's from a cheap toy keyboard. I would like to add a sampler feature to the app where the user could choose what instrument they want the audio to sound like. There is a JS library that works with the Audio Data API called dsp.js (digital signal processing) and has a sampler feature as well as many other awesome features ([https://wiki.mozilla.org/Audio_Data_API_JS_Library](https://wiki.mozilla.org/Audio_Data_API_JS_Library)). Once I figure out how to use dsp.js I plan on utilizing it in the next release of this guitar tab player.
+
+2. __Add Support for Chords__ - right now the tab player can only play single notes.
+
+3. __Add Pause Button for Audio__
+
+4. __Support Tabs with Multiple Tracks__ - It would be pretty awesome if the tab player could play multiple tracks at the same time. Like a track for bass, track for guitar, track for banjo, etc...
+
+5. __Utilize Local Storage for MusicXML Files__ - right now the MusicXML files are on the server. I would like to utilize HTML5 local storage and drag and drop support to read local MusicXML files.
+
+And the list could go on and on...
+
+There are other Guitar Tab Players out there on the web like:
+
+* [Songsterr](https://www.songsterr.com/) - an Adobe Flash powered guitar tab site that allows users to interact with guitar tab and play multi-track scores.
+
+* [Myriad Music Plug-in](http://www.myriad-online.com/en/products/mmplugin.htm) - allows users to display and play tablature in standardized formats like MusicXML.
+
+These players are awesome but they require plugins to view and play guitar tab (Adobe Flash and the custom Myriad Music Plugin). There are many other sites that provide guitar tablature by using static content for each tab with images, text, and/or mp3 files which can be very difficult to maintain.
+
+This HTML5 Guitar Tab app is just a proof of concept right now but in a few years from now when the Audio Data API is standardized it will reinvent the way we interact with sheet music on the web.
+
+---
+
+### Update: 1/11/2011
+
+The following updates have been applied to this HTML5 Guitar Tab Player:
+
+* __Fixed bug with clicking Play button while tab is already playing__ – previously this would cause the tab to start playing again so you would hear multiple tracks playing at the same time.
+
+* __Added an ADSR Envelope to fade in and out each note__ – previously there was a pop after each note was played. Applying this ADSR Envelope has removed the pop.
+
+* __Added Stop button__
+
+
+I have written an article that has been published to Mozilla Hacks ([https://hacks.mozilla.org/](https://hacks.mozilla.org/)) about the technical details of this guitar tab player. Check out the post here: [https://hacks.mozilla.org/2011/01/html5guitar/](https://hacks.mozilla.org/2011/01/html5guitar/)
+
+Also, here is a video demonstrating how this tab player works: <iframe width="560" height="345" src="https://www.youtube.com/embed/4MJeurIHf2I?rel=0" frameborder="0"></iframe>
