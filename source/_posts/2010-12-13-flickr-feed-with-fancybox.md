@@ -19,12 +19,8 @@ Using jQuery I combined Flickr's public photo feed with FancyBox to provide an i
 By using Flickr's JSON feed I was able to implement this without any server-side code.
 
 
-{% raw %}
-<div class="button-container">
-  <a href="http://gregjopa.me/code/javascript/flickr_fancybox/jquery_flickr_fancybox_mashup.zip" class="btn btn--primary">Download</a>
-  <a href="http://gregjopa.me/code/javascript/flickr_fancybox/" class="btn btn--primary">Demo</a>
-</div>
-{% endraw %}
+{% demo_links http://gregjopa.me/code/javascript/flickr_fancybox/jquery_flickr_fancybox_mashup.zip
+  http://gregjopa.me/code/javascript/flickr_fancybox/ %}
 
 
 FancyBox is a great jQuery plugin for floating content on top of web pages. It works with images, videos, html, and ajax content. Read more about FancyBox here: [http://www.fancybox.net/](http://www.fancybox.net/)

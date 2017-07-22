@@ -18,12 +18,7 @@ With the new client-side script APIs ([Firefox's Audio Data API](https://wiki.mo
 <!--more-->
 
 
-{% raw %}
-<div class="button-container">
-  <a href="https://github.com/gregjopa/music.js" class="btn btn--primary">Download</a>
-  <a href="http://gregjopa.com/music.js/" class="btn btn--primary">Demo</a>
-</div>
-{% endraw %}
+{% demo_links https://github.com/gregjopa/music.js http://gregjopa.com/music.js/ %}
 
 
 ## How it works

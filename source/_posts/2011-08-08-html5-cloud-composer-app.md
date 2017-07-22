@@ -17,12 +17,8 @@ Last week I attended Google's HTML5 Web App Hackathon event in Chicago, IL. Over
 <!--more-->
 
 
-{% raw %}
-<div class="button-container">
-  <a href="https://github.com/gregjopa/HTML5-Cloud-Composer" class="btn btn--primary">Download</a>
-  <a href="http://gregjopa.com/HTML5-Cloud-Composer/" class="btn btn--primary">Demo</a>
-</div>
-{% endraw %}
+{% demo_links https://github.com/gregjopa/HTML5-Cloud-Composer
+  http://gregjopa.com/HTML5-Cloud-Composer/ %}
 
 
 ## How it works

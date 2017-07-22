@@ -18,13 +18,8 @@ I put together a demo that conditionally applies fixed positioning to a side nav
 <!--more-->
 
 
-{% raw %}
-<div class="button-container">
-  <a href="http://gregjopa.me/code/javascript/fixed_positioning/jquery_conditional_fixed_positioning.zip"
-    class="btn btn--primary">Download</a>
-  <a href="http://gregjopa.me/code/javascript/fixed_positioning/" class="btn btn--primary">Demo</a>
-</div>
-{% endraw %}
+{% demo_links http://gregjopa.me/code/javascript/fixed_positioning/jquery_conditional_fixed_positioning.zip
+  http://gregjopa.me/code/javascript/fixed_positioning/ %}
 
 
 ## How it works

@@ -22,12 +22,8 @@ I built a web-based guitar tab player using Firefox's Audio Data API and Vexflow
 To view this demo you must be using Firefox 4 as your browser.
 
 
-{% raw %}
-<div class="button-container">
-  <a href="https://github.com/gregjopa/HTML5-Guitar-Tab-Player" class="btn btn--primary">Download</a>
-  <a href="http://gregjopa.me/code/html5/audio/tabplayer/" class="btn btn--primary">Demo</a>
-</div>
-{% endraw %}
+{% demo_links https://github.com/gregjopa/HTML5-Guitar-Tab-Player
+  http://gregjopa.me/code/html5/audio/tabplayer/ %}
 
 
 This tab player is very basic and can only play single notes. After seeing the audiodata.js project on GitHub ([https://github.com/notmasteryet/audiodata](https://github.com/notmasteryet/audiodata)) and viewing the score example with "Twinkle, Twinkle, Little Star" I was inspired to build this guitar tab player.

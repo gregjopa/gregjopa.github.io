@@ -19,11 +19,7 @@ Running D3 on the server with Node.js is pretty easy. You can reuse most of your
 <!--more-->
 
 
-{% raw %}
-<div class="button-container">
-  <a href="https://github.com/gregjopa/d3-server-side-demo" class="btn btn--primary">Download Demo App</a>
-</div>
-{% endraw %}
+{% demo_links https://github.com/gregjopa/d3-server-side-demo %}
 
 
 ## Getting started with running D3 on Node.js

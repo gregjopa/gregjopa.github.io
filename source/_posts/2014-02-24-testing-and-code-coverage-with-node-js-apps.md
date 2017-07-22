@@ -18,12 +18,8 @@ Developing maintainable apps requires having good test coverage. The JavaScript 
 <!--more-->
 
 
-{% raw %}
-<div class="button-container">
-  <a href="https://github.com/gregjopa/express-app-testing-demo" class="btn btn--primary">Download</a>
-  <a href="http://express-app-testing-demo.herokuapp.com/" class="btn btn--primary">Demo</a>
-</div>
-{% endraw %}
+{% demo_links https://github.com/gregjopa/express-app-testing-demo
+  http://express-app-testing-demo.herokuapp.com/ %}
 
 
 ## Demo App Functionality
