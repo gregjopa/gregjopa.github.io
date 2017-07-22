@@ -8,8 +8,9 @@ categories:
 - JavaScript
 ---
 
-{% asset_img jquerymobile_googlemaps_screenshot.jpg "jQuery Mobile Google Maps" %}
-
+{% container img-container %}
+  {% asset_img jquerymobile_googlemaps_screenshot.jpg "jQuery Mobile Google Maps" %}
+{% endcontainer %}
 
 Using ASP.NET MVC I created a mashup with jQuery Mobile and Google Maps. This app reads a list of locations from an xml file and creates a jQuery Mobile page for each location. Each page contains a map with a marker and an info window for displaying the location details.
 

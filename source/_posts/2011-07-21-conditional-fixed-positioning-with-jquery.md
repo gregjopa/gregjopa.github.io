@@ -7,7 +7,9 @@ categories:
 - JavaScript
 ---
 
-{% asset_img fixed_positioning_screenshot.jpg "Conditional Fixed Positioning with jQuery" %}
+{% container img-container %}
+  {% asset_img fixed_positioning_screenshot.jpg "Conditional Fixed Positioning with jQuery" %}
+{% endcontainer %}
 
 Many websites use CSS fixed positioning to pin elements to the top or bottom of a webpage so they never scroll out of view. This technique is commonly used for navigation elements on sites that require the user to scroll through many screenfuls of information on a single page.
 
@@ -48,7 +50,9 @@ view.bind("scroll resize", $.throttle( 100, stickyNavCheck ) );
 
 If your browser window is smaller than the width of the website a horizontal scrollbar will appear. This horizontal scrollbar will cause your fixed position element to float over and hide other content on the page. Here is a screenshot of this problem:
 
-{% asset_img fixed_positioning_horizontal_scroll_alignment_problem_screenshot.jpg "Fixed Positioning Scroll Problem" %}
+{% container img-container %}
+  {% asset_img fixed_positioning_horizontal_scroll_alignment_problem_screenshot.jpg "Fixed Positioning Scroll Problem" %}
+{% endcontainer %}
 
 To fix this issue with the horizontal scrollbar you need to check and see if the user has horizontally scrolled the page and if so update the _left_ css property of the fixed element. Here is the code I used to keep the fixed side navigation aligned:
 
@@ -90,7 +94,9 @@ Fixed positioning is technically supported on mobile safari but it doesn't work 
 
 Here is how fixed positioning displays in the demo on my iPad before I disabled it by checking the user agent string for iOS devices (notice how the fixed side navigation jumped halfway off the screen instead of floating at the top of the the viewport):
 
-{% asset_img fixed_positioning_ipad_problem_screenshot.jpg "Fixed Positioning iPad Problem" %}
+{% container img-container %}
+  {% asset_img fixed_positioning_ipad_problem_screenshot.jpg "Fixed Positioning iPad Problem" %}
+{% endcontainer %}
 
 Unfortunately fixed positioning has made it to [Modernizr's list of undetectables](https://github.com/Modernizr/Modernizr/wiki/Undetectables) due to this issue. To disable the fixed positioning js code on iOS and Android we are forced to do resort to sniffing the user agent string to check for these devices. I found the following gist which contains custom Modrenizr tests to check for fixed position support and does ua sniffing for iOS devices: [https://gist.github.com/855078/109ded4b4dab65048a1e7b4f4bd94c93cebb26b8](https://gist.github.com/855078/109ded4b4dab65048a1e7b4f4bd94c93cebb26b8). My demo uses this gist to check for fixed position support. iOS 5 will supposedly have proper support for fixed positioning so hopefully fixed positioning won't be a problem with mobile devices in the future.
 

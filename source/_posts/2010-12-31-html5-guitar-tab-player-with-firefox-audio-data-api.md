@@ -8,7 +8,9 @@ categories:
 - HTML5
 ---
 
-{% asset_img guitartabplayer_screenshot.jpg "Vexflow Guitar Tab Player" %}
+{% container img-container %}
+  {% asset_img guitartabplayer_screenshot.jpg "Vexflow Guitar Tab Player" %}
+{% endcontainer %}
 
 What if there was a standardized way to display interactive guitar tab on the web? And this guitar tab could be listened to and required no plugins to run, just a browser...
 

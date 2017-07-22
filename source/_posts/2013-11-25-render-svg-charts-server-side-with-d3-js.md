@@ -8,7 +8,9 @@ categories:
 - Node.js
 ---
 
-{% asset_img d3_server_side_screenshot.jpg "D3 Bar Chart" %}
+{% container img-container %}
+  {% asset_img d3_server_side_screenshot.jpg "D3 Bar Chart" %}
+{% endcontainer %}
 
 It's common to use d3.js to render svg charts on the client-side. With the d3 node module you can render svg charts on the server-side as well. The d3 node module uses jsdom to simulate the browser's Document Object Model (DOM) which allows for d3 selectors to work on the server-side.
 

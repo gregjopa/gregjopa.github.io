@@ -7,8 +7,9 @@ categories:
 - ASP.NET
 ---
 
-{% asset_img CRUD_Operations_screenshot.jpg "CRUD Operations with XML Data in ASP.NET MVC 3" %}
-
+{% container img-container %}
+  {% asset_img CRUD_Operations_screenshot.jpg "CRUD Operations with XML Data in ASP.NET MVC 3" %}
+{% endcontainer %}
 
 Create, read, update, and delete (CRUD) operations are easy to perform in ASP.NET MVC. By using the default T4 scaffolding templates and strongly-typed views you can quickly build a web application that can create, update, and delete records.
 

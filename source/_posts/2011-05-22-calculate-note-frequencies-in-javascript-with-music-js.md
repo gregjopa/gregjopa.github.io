@@ -7,7 +7,9 @@ categories:
 - JavaScript
 ---
 
-{% asset_img musicjs_logo.jpg "Note frequencies in JavaScript with MUSIC.js" %}
+{% container img-container %}
+  {% asset_img musicjs_logo.jpg "Note frequencies in JavaScript with MUSIC.js" %}
+{% endcontainer %}
 
 MUSIC.js is a music creation library containing functions and data sets to generate notes, intervals, chords, and scales.
 
@@ -34,7 +36,9 @@ The Circle of Fifths is used to define notes in MUSIC.js. The main benefits of u
 
 __Circle of Fifths Chart w/ the D note highlighted__
 
-{% asset_img circleOfFifths.jpg "Circle of Fifths" %}
+{% container img-container %}
+  {% asset_img circleOfFifths.jpg "Circle of Fifths" %}
+{% endcontainer %}
 
 
 Since D0 is our main note it has the coordinate of [0, 0]. The note A is a fifth from D so A0 has the coordinate [0, 1]. The note E is two fifths away from D and requires us to use the octave coordinate to define E0. Since E1 would be [0, 2] we need to drop one octave to get E0 which is [-1, 2].

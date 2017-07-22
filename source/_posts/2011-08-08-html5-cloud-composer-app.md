@@ -8,7 +8,9 @@ categories:
 - HTML5
 ---
 
-{% asset_img cloud_composer_screenshot.jpg "HTML5 Cloud Composer App" %}
+{% container img-container %}
+  {% asset_img cloud_composer_screenshot.jpg "HTML5 Cloud Composer App" %}
+{% endcontainer %}
 
 Last week I attended Google's HTML5 Web App Hackathon event in Chicago, IL. Over 100 developers attended this one day event and got to spend the day at Google's Chicago office. At the beginning of the event we split up into groups and got to design and develop an app of our choosing using HTML5. My team designed the HTML5 Cloud Composer app which lets you do basic music composition in the browser.
 

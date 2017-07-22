@@ -27,12 +27,18 @@
         }
     }
 
-    .post .post-content img, .postShorten img {
-        border:      #fff 8px solid;
-        border-radius: 3px;
-        box-shadow:    0 1px 4px rgba(0,0,0,0.15);
-        box-sizing:    border-box;
-        margin:        2px 2px 24px;
+    .post .post-content .img-container, .postShorten .img-container {
+        background-color: white;
+        display:          inline-block;
+        padding:          8px;
+        border-radius:    3px;
+        box-shadow:       0 1px 4px rgba(0,0,0,0.15);
+        box-sizing:       border-box;
+        margin:           2px 2px -10px;
+    }
+
+    .postShorten p {
+        margin-top: 24px;
     }
 
 }

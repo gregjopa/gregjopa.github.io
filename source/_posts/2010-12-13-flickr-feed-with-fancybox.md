@@ -7,7 +7,9 @@ categories:
 - JavaScript
 ---
 
-{% asset_img flickr_fancybox_screenshot.jpg "Flickr with Fancybox" %}
+{% container img-container %}
+  {% asset_img flickr_fancybox_screenshot.jpg "Flickr with Fancybox" %}
+{% endcontainer %}
 
 Using jQuery I combined Flickr's public photo feed with FancyBox to provide an interactive way to browse the latest Flickr pictures. My code pulls pictures from Flickr and formats them into a lightbox-style image gallery.
 

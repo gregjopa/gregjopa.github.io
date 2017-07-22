@@ -9,7 +9,9 @@ categories:
 - Testing
 ---
 
-{% asset_img istanbul_code_coverage_banner_screenshot.jpg "Istanbul Code Coverage" %}
+{% container img-container %}
+  {% asset_img istanbul_code_coverage_banner_screenshot.jpg "Istanbul Code Coverage" %}
+{% endcontainer %}
 
 Developing maintainable apps requires having good test coverage. The JavaScript community has created some awesome tools that make it easy to implement workflows for code linting, unit/integration testing, and measuring code coverage. This post focuses on how to develop tests with [Mocha](http://mochajs.org/) and [Supertest](https://github.com/visionmedia/supertest) and how to generate code coverage reports with [Istanbul](http://gotwarlost.github.io/istanbul/).
 
@@ -202,10 +204,14 @@ Code coverage tools analyze an application's source code and test suite and then
 [Istanbul](http://gotwarlost.github.io/istanbul/) is a JavaScript code coverage tool that provides instrumentation and reporting. It has an html reporting option and also an lcov reporting option that can be used with the code quality tool [SonarQube](https://www.sonarqube.org/).
 
 Here's a screenshot of the Istanbul html reporter for a module with zero tests:
-{% asset_img istanbul_bad_test_coverage_screenshot.png "Istanbul Bad Test Coverage" %}
+{% container img-container %}
+  {% asset_img istanbul_bad_test_coverage_screenshot.png "Istanbul Bad Test Coverage" %}
+{% endcontainer %}
 
 After adding tests for all methods in this module the html report will look like this:
-{% asset_img istanbul_good_test_coverage_screenshot.png "Istanbul Good Test Coverage" %}
+{% container img-container %}
+  {% asset_img istanbul_good_test_coverage_screenshot.png "Istanbul Good Test Coverage" %}
+{% endcontainer %}
 
 Istanbul can be installed as a global node module and used from the command line. Or you can use Istanbul as a local module with Grunt which is the approach I took with my test app. I describe configuring Istanbul with Grunt in the following "Grunt Workflow" section.
 
@@ -216,8 +222,9 @@ SonarQube is a code quality tool that provides code coverage reporting as well a
 Sonar stores code coverage statistics about your application in a database which makes it possible to compare different versions of your application to see if your code coverage is getting better or worse.
 
 Here's a screenshot of this test project in SonarQube:
-{% asset_img sonarqube_code_analysis_screenshot.png "SonarQube Code Analysis" %}
-
+{% container img-container %}
+  {% asset_img sonarqube_code_analysis_screenshot.png "SonarQube Code Analysis" %}
+{% endcontainer %}
 
 ## Grunt Workflow
 

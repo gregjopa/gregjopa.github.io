@@ -7,7 +7,9 @@ categories:
 - Developer Tools
 ---
 
-{% asset_img firefox_addin_logo.jpg "Add-ons for Firefox" %}
+{% container img-container %}
+  {% asset_img firefox_addin_logo.jpg "Add-ons for Firefox" %}
+{% endcontainer %}
 
 Firefox is my favorite browser because of all the awesome plugins available for it. Here is a list of my 5 favorite Firefox plugins I frequently use for web development:
 
