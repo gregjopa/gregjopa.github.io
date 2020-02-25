@@ -43,12 +43,17 @@ global:
         other: "{n} posts found"
     categories_found:
         zero: "no category found"
-        one: "1 cartegory found"
+        one: "1 category found"
         other: "{n} categories found"
     tags_found:
         zero: "no tag found"
         one: "1 tag found"
         other: "{n} tags found"
+    read_more_about_author: "Read more about the author"
+    zoom_in_on_picture: "Zoom in on the picture"
+    go_to_homepage: "Go to homepage"
+    open_link: "Open the link"
+    open_post: "Open the post"
 
 pagination:
     page: "page %d"
@@ -63,12 +68,19 @@ post:
     categorized_in: "in"
     tagged_in: "TAGGED IN"
     toc: "Table of Contents"
+    back_to_top: "Back to top"
     read_more: "Continue reading"
     go_to_website: "Go to website"
     comment_and_share: "Comment and share"
+    comment: "Leave a comment"
+    share: "Share this post"
+    gallery: "Gallery"
+    image:
+        one: "image"
+        other: "%d images"
 
 author:
     # Your biography (Markdown and HTML supported)
     bio: "Web developer and musician. Passionate about the open web."
     # Your job
-    job: "Web Developer"
+    job: "Software Engineer"

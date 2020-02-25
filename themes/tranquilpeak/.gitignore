@@ -1,4 +1,4 @@
 .sass-cache
 assets
 node_modules
-_bower_components
+.DS_Store

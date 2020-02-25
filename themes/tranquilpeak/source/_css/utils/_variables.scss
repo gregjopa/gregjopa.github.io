@@ -150,7 +150,7 @@ $sidebar: (
     'lg-screen-width':  250px,
     'xlg-screen-width': 500px,
     'background':       rgba(17, 26, 35, 0),
-    'color':            #fff
+    'color':            #ebebeb
 );
 
 // Main
@@ -244,6 +244,7 @@ $pagination-height: 60px;
 // Post thumbnail image
 // Width and height of post's thumbnail image
 $post-thumbnail-image-width: 140px;
+$post-bottom-thumbnail-image-max-height: 250px;
 
 // Tooltip
 $tooltip: (
