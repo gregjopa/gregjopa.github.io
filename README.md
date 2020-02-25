@@ -1,6 +1,6 @@
 # gregjopa.com
 
-Hexo static site generator for [http://gregjopa.com/](http://gregjopa.com/).
+Hexo static site generator for [https://www.gregjopa.com/](https://www.gregjopa.com/).
 
 
 ## Hexo commands
