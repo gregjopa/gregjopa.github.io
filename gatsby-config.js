@@ -17,7 +17,7 @@ module.exports = {
     {
       resolve: `@lekoarts/gatsby-theme-minimal-blog`,
       options: {
-        colorMode: `dark`,
+        formatString: `MM.DD.YYYY`,
         navigation: [
           {
             title: `Blog`,
