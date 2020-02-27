@@ -4,12 +4,20 @@ require(`dotenv`).config({
 
 module.exports = {
   siteMetadata: {
-    siteTitleAlt: `Minimal Blog - Gatsby Theme`,
+    siteTitle: `Greg Jopa`,
+    siteTitleAlt: `Greg Jopa - Adventures in Web Development`,
+    siteHeadline: `Greg Jopa - Adventures in Web Development`,
+    siteUrl: `https://www.gregjopa.com/`,
+    siteDescription: `Web development blog of Greg Jopa. Featuring articles about JavaScript and other interesting technologies.`,
+    siteLanguage: `en`,
+    siteImage: `/banner.jpg`,
+    author: `@gregjopa`
   },
   plugins: [
     {
       resolve: `@lekoarts/gatsby-theme-minimal-blog`,
       options: {
+        colorMode: `dark`,
         navigation: [
           {
             title: `Blog`,
@@ -23,12 +31,12 @@ module.exports = {
         externalLinks: [
           {
             name: `Twitter`,
-            url: `https://twitter.com/lekoarts_de`,
+            url: `https://twitter.com/gregjopa/`
           },
           {
-            name: `Instagram`,
-            url: `https://www.instagram.com/lekoarts.de/`,
-          },
+            name: `LinkedIn`,
+            url: `https://www.linkedin.com/in/gregjopa/`
+          }
         ],
       },
     },
