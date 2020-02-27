@@ -1,0 +1,121 @@
+---
+title: Calculate note frequencies in JavaScript with MUSIC.js
+slug: 2011/05/calculate-note-frequencies-in-javascript-with-music-js
+date: 2011-05-22 23:52:00
+comments: true
+tags:
+- JavaScript
+---
+
+import DemoButtonGroup from "../../components/DemoButtonGroup/";
+
+![Note frequencies in JavaScript with MUSIC.js](./musicjs_logo.jpg)
+
+MUSIC.js is a music creation library containing functions and data sets to generate notes, intervals, chords, and scales.
+
+With the new client-side script APIs ([Firefox's Audio Data API](https://wiki.mozilla.org/Audio_Data_API) and Webkit's Web Audio API) we have the ability to do audio synthesis (generate sound) with javascript. MUSIC.js is designed to make it easier to do audio synthesis with javascript by providing functionality for frequency calculations and transposing notes.
+
+<!--more-->
+
+<DemoButtonGroup
+  downloadLink="https://github.com/gregjopa/music.js"
+  demoLink="https://www.gregjopa.com/music.js/"
+/>
+
+## How it works
+
+[Piers Titus](http://www.toverlamp.org/) and I worked together to design MUSIC.js to provide a clean syntax for defining and managing notes. Piers is the brains behind the music theory involved in this library. Currently MUSIC.js only uses twelve-tone equal temperament tuning since its the most popular tuning and the easiest to implement. The library is built with flexibility in mind to support other tunings. MUSIC.js is currently a work in progress.
+
+## Notes
+
+The Circle of Fifths is used to define notes in MUSIC.js. The main benefits of using the Circle of Fifths are that it gives us the ability to distinguish sharps and flats, and that it makes calculations such as transposing and frequency calculation very easy. We define notes as two valued coordinates [octave, fifth] based on the number of octaves and fifths relative to the 'main note'. The D note at octave 0 is used as the 'main note' in MUSIC.js since it is the center of the circle of fifths (F-C-G-D-A-E-B). All notes are defined by their distance from this main note. Lets take a look at an example:
+
+__Circle of Fifths Chart w/ the D note highlighted__
+
+![Circle of Fifths](circleOfFifths.jpg)
+
+Since D0 is our main note it has the coordinate of [0, 0]. The note A is a fifth from D so A0 has the coordinate [0, 1]. The note E is two fifths away from D and requires us to use the octave coordinate to define E0. Since E1 would be [0, 2] we need to drop one octave to get E0 which is [-1, 2].
+
+The note A4 has a nice frequency of 440 and is used as the base frequency. In order to use A4 as the base frequency a base offset coordinate is added ([4, 1]) to change the 'main note' from D0 to A4. Make sense? If not, don't worry because MUSIC.js handles this logic so you don't have to.
+
+Here is the syntax to use for defining notes with MUSIC.js:
+
+
+``` javascript
+var n = Note.fromLatin('A4');
+console.log(n); //prints ({coord:[0, 0]})
+
+//getters
+var freq = n.frequency(); // returns 440
+var noteName = n.latin(); // returns "A"
+var octave = n.octave(); // returns 4
+```
+
+
+The coordinate is the only attribute stored for a note object. All other note attributes like frequency, latin name, and octave are calculated upon request.
+
+## Intervals
+
+Intervals measure the distance between two notes and are used by MUSIC.js to define chords and scales. Intervals can be defined by name (ex: "major third", "fifth", etc...), by number of semitones, or by the coordinate directly. MUSIC.js also contains add() and subtract() methods for transposing notes and chords with an interval.
+
+
+``` javascript
+var c = Note.fromLatin('C3');
+
+// by semitone
+var wholeStep = Interval.fromSemitones(2);
+var d = c.add(wholeStep);
+console.log(d.latin()); // "D"
+
+// by interval name
+var g = c.add('fifth');
+console.log(g.latin()); // "G"
+```
+
+
+## Chords
+
+Chords are defined by an array of note objects. Chords can be created using intervals or note names.
+
+
+``` javascript
+// by intervals
+var c = Note.fromLatin('C4');
+var cmaj = c.add(['unison','major third','fifth']);
+
+// or by note names
+var cmaj = Note.fromLatin('C4E4G4');
+
+
+// then loop through chord array for each note object
+for (var i = 0; i < cmaj.length; i++) {
+console.log(cmaj[i].frequency());
+}
+```
+
+
+## Scales
+
+MUSIC.js contains a library of scales that are accessed based on the scale name (ex: 'major', 'harmonic minor', etc...). A scale returns an array of note objects.
+
+
+``` javascript
+var n = Note.fromLatin('C4');
+var majorScale = n.scale('major');
+
+// then loop through scale array for each note object
+for (var i = 0; i < majorScale.length; i++) {
+console.log(majorScale[i].frequency());
+}
+```
+
+
+## Future of MUSIC.js
+
+The goal for MUSIC.js is to keep it independent from the Audio APIs. This way a modular design can be used for synthesizing audio. MUSIC.js can be responsible for creating the music and a music synthesizer module can be responsible for actually generating the sound data. With this design one synthesizer could be easily swapped out for another.
+
+Right now MUSIC.js is an incomplete music creation library. It can create notes, chords, and scales but can’t define note duration, sequence, volume, etc… I am not sure if this functionality should be included in MUSIC.js or in a separate library. Perhaps a library containing a Song class composed of Tracks and Tracks composed of Notes.
+
+The [MusicXML](http://www.musicxml.com/) format does a good job with storing music notation and has become the standard format for sharing sheet music between notation software. However, MusicXML files for complex songs can become quite large and can take a while to parse with javascript. Now that we can render music notation with javascript (ex: [https://www.alphatab.net/](https://www.alphatab.net/)) and we can synthesize audio with javascript it makes sense to store music notation with JSON instead of XML. The JSON format is more lightweight and easier to parse with javascript. Perhaps MUSIC.js could be part of a solution for processing music notation in a JSON format.
+
+Leave a comment and let me know what you think of MUSIC.js.

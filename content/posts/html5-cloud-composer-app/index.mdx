@@ -1,0 +1,48 @@
+---
+title: HTML5 Cloud Composer App
+slug: 2011/08/html5-cloud-composer-app
+date: 2011-08-08 00:52:00
+comments: true
+tags:
+- JavaScript
+- HTML5
+---
+
+import DemoButtonGroup from "../../components/DemoButtonGroup/";
+
+![HTML5 Cloud Composer App](cloud_composer_screenshot.jpg)
+
+Last week I attended Google's HTML5 Web App Hackathon event in Chicago, IL. Over 100 developers attended this one day event and got to spend the day at Google's Chicago office. At the beginning of the event we split up into groups and got to design and develop an app of our choosing using HTML5. My team designed the HTML5 Cloud Composer app which lets you do basic music composition in the browser.
+
+<!--more-->
+
+<DemoButtonGroup
+  downloadLink="https://github.com/gregjopa/HTML5-Cloud-Composer"
+  demoLink="https://www.gregjopa.com/HTML5-Cloud-Composer/"
+/>
+
+## How it works
+
+This Cloud Composer app is based off of the existing "Maestro" Android app which does music composition: [https://play.google.com/store/apps/details?id=com.revelli.maestro](https://play.google.com/store/apps/details?id=com.revelli.maestro). Our goal was to design something similar to this Maestro app using HTML5 that looked good on both desktops and mobile devices. To accomplish this goal we designed a responsive layout for our app using the jQuery Mobile framework and CSS3 media queries.
+
+Our Cloud Composer app uses the [Vexflow music notation library](http://www.vexflow.com/) to display music notes. We developed a simple editor UI for Vexflow so the user can easily add, edit, and delete notes. Vexflow stores the coordinates for existing notes in a javascript object which we used to look up the exact location of each note on the canvas. With this data we were able to match up note coordinates to the click event coordinates so the user can easily select an existing note from the sheet music just by clicking on it.
+
+We used the [audiolet audio synthesis library](https://github.com/oampo/Audiolet) to play the audio for the composed score. This library works with both the Web Audio API and the Audio Data API and has a bunch of features for synthesizing music notes.
+
+## Cloud Composer app features
+
+* __Add Note__ – use the select menus to choose the note name, accidental, octave, and duration for a note and then click the <em>add/edit note</em> button to add the new note to the canvas. The red cursor needs to be highlighting the next available spot on the canvas in order to add a new note. You can click to the right of the last existing note on the canvas to select the next available spot.
+
+* __Edit Note__ – click on an existing note on the canvas to select it for editing. Then use the select menus to set the note details and click the _add/edit note_ button to update the note.
+
+* __Scroll Sheet Music__ – move the slider from left to right to horizontally scroll the sheet music.
+
+* __Play Audio__ - If your browser is Firefox 4+ or a version of Chrome with the web audio api enabled you should see a <em>play audio</em> button in the app for playing the audio for the composed score. If your browser does not support the new audio apis then the _play audio_ button will be hidden.
+
+## Hackathon
+
+I had an amazing time at the Google Hackathon. I got to meet a bunch of talented developers and learned few new things about JavaScript and CSS3. I will definitely be attending more hackathons in the future.
+
+During the Google Hackathon we only had about 7 hours to develop our project. The scope of our project was too big for a one day hackathon and we did not get to add a lot the features we would have liked to. So I spent a couple more days developing the Cloud Composer app to add some of these missing features and I uploaded it to github in case anyone else would like to contribute to it. One feature I did not have time to add was using the [jQuery mobiscroll plugin](https://code.google.com/archive/p/mobiscroll/) for selecting note details. This mobiscroll plugin would be awesome to use to select note details since it requires fewer clicks than the existing select menus.
+
+Leave a comment and let me know what you think of the Cloud Composer app. If you were one of the team members who worked on this app at the Google Hackathon leave a comment with your name and a link to your personal website, twitter, or linkedin profile so we can keep in touch.

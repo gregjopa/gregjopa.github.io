@@ -1,0 +1,144 @@
+---
+title: JavaScript Interview Questions
+slug: 2012/08/javascript-interview-questions
+date: 2012-08-08 00:54:00
+comments: true
+tags:
+- JavaScript
+---
+
+How well do you know JavaScript? Here are some JavaScript interview questions I was recently asked. After the interview I had to research some of these because I got stumped... JavaScript is hard and hopefully this post helps you out on your next front-end web developer interview.
+
+<!--more-->
+
+
+## Questions
+
+### 1. How do you check if a variable is undefined? How about null?
+
+The values _undefined_ and _null_ are different in Javascript. If you declare a variable and never set it equal to anything then it is undefined. Object properties that don't exist also return undefined. The type _null_ is used when you want to set your variables or object properties to a non-value. See MDN for more info: [https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript#Other_types](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript#Other_types)
+
+
+``` javascript
+var fooVariable;
+if (typeof fooVariable === "undefined")  // returns true
+
+var fooObject = {};
+if (typeof fooObject.barProperty === "undefined")  // returns true
+
+
+fooVariable = null;
+if (fooVariable === null)  // returns true
+
+fooObject = { barProperty: null };
+if (fooObject.barProperty === null)  // returns true
+```
+
+
+This question opens up the door for a discussion on loose typing in JavaScript. Follow up questions:
+
+* What happens if you don't declare a variable and check for its type?
+* How does typing in JavaScript compare to a strongly typed language like Java?
+* Why didn't you use the _typeof_ operator to check for null? What are some problems associated with the _typeof_ operator?
+
+
+---
+
+
+### 2. How does variable scope work in JavaScript?
+
+JavaScript scope is function-based, it does not have block scope. Defining a variable inside a function makes it a local variable since it is not visible outside of that function. Global variables are declared outside of a function and are visible in every scope. In web browsers JavaScript global variables are stored in the _window_ global object. Global variables can be declared like so:
+
+
+``` javascript
+// outside any function
+var fooGlobalVar = "Hello World";
+
+// or on the window global object
+window.fooGlobalVar = "Hello World";
+
+// or without var as implied global
+fooGlobalVar = "Hello World";
+```
+
+
+Consider the following code:
+
+
+``` javascript
+var testFunction = function() {
+
+    fooVariable = 2;
+
+    console.log(fooVariable);  // prints 2
+
+    var fooVariable;
+
+};
+
+testFunction();
+
+console.log(fooVariable);  // throws a reference error
+
+```
+
+
+What is the scope of _fooVariable_? Is it local to the function or is it implied global?
+
+In JavaScript, variable declaration is hoisted to the beginning of the execution context. This execution context is either the function body or global scope. It doesn't matter that _fooVariable_ was declared at the bottom of the function. That variable declaration was hoisted to the top of the function which is why _fooVariable_ is NOT implied global. The above code will throw a reference error when it tries to log _fooVariable_ outside the function since _fooVariable_ is not global. See MDN for more info on hoisting: [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var#var_hoisting](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var#var_hoisting)
+
+Follow up questions:
+
+* Explain Execution Context in JavaScript and how the keyword _this_ is used.
+* How does the scope chain work and where do prototype objects fit in?
+
+
+---
+
+
+### 3. How do JavaScript closures work?
+
+Closures are definitely an advanced JavaScript topic and I am still learning how to use them. If you are interviewing for a Front-end Web Developer position you will most likely be asked about closures. So for your interview I recommend preparing a one minute elevator speech on how closures work and a specific example on how you would use one.
+
+My favorite one sentence explanation of a closure is "A closure in JavaScript is like keeping a copy of all the local variables, just as they were when a function exited."[5]. Closures are often used to create private variables and are also used in callbacks and timers. A good example that helped me understand closures is accessing variables by value in an asynchronous operation. You may not want the current value of a variable but a snapshot of its value at a certain point in time. Here's an example of a closure from [jqfundamentals.com](http://jqfundamentals.com) that demos closing a variable in a function to "freeze" its current value so it can be used in an onclick event:
+
+``` javascript
+// code snippet from jqfundamentals.com that uses jquery
+
+// BAD
+// this won't behave as we want it to;
+// every click will alert 5
+for (var i=0; i<5; i++) {
+    $('<p>click me</p>').appendTo('body').click(function() {
+        alert(i);
+    });
+}
+
+
+// GOOD
+// 'close' the value of i inside createFunction, so it won't change
+var createFunction = function(i) {
+    return function() { alert(i); };
+};
+
+for (var i=0; i<5; i++) {
+    $('<p>click me</p>').appendTo('body').click(createFunction(i));
+}
+```
+
+Follow up questions:
+
+* In JavaScript are variables passed by value or reference?
+* How do you prevent memory leaks when working with closures?
+
+
+## Conclusion
+
+JavaScript takes years to master and after interviewing and writing this post I realize I have a lot more to learn. But JavaScript is the world's most popular programming language so its worth the struggle to learn. Luckily the web is filled with JavaScript books and tutorials to help us grasp the language. Here are some great JavaScript resources I used to write this post:
+
+1. [MDN - A re-introduction to JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript)
+2. [jQuery Fundamentals](http://jqfundamentals.com/)
+3. [Understanding the "this" keyword in JavaScript](http://unschooled.org/2012/03/understanding-javascript-this/)
+4. [JavaScript: Passing by Value or by Reference](https://snook.ca/archives/javascript/javascript_pass/)
+5. [Great Stack Overflow answer on how JavaScript Closures work](http://stackoverflow.com/questions/111102/how-do-javascript-closures-work/111111#111111)
+6. [Secrets of the JavaScript Ninja](http://jsninja.com/)
