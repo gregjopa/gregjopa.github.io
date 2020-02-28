@@ -8,9 +8,9 @@ module.exports = {
     siteTitleAlt: `Greg Jopa - Adventures in Web Development`,
     siteHeadline: `Greg Jopa - Adventures in Web Development`,
     siteUrl: `https://www.gregjopa.com/`,
-    siteDescription: `Web development blog of Greg Jopa. Featuring articles about JavaScript and other interesting technologies.`,
+    siteDescription: `Web development blog of Greg Jopa. Featuring articles about JavaScript and other interesting web technologies.`,
     siteLanguage: `en`,
-    siteImage: `/banner.jpg`,
+    siteImage: `/greg_jopa_outdoor_headshot.jpg`,
     author: `@gregjopa`
   },
   plugins: [
@@ -30,6 +30,10 @@ module.exports = {
         ],
         externalLinks: [
           {
+            name: `GitHub`,
+            url: `https://github.com/gregjopa/`
+          },
+          {
             name: `Twitter`,
             url: `https://twitter.com/gregjopa/`
           },
@@ -43,16 +47,16 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        trackingId: process.env.GOOGLE_ANALYTICS_ID,
+        trackingId: `UA-20498821-1`,
       },
     },
     `gatsby-plugin-sitemap`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `minimal-blog - @lekoarts/gatsby-theme-minimal-blog`,
-        short_name: `minimal-blog`,
-        description: `Typography driven, feature-rich blogging theme with minimal aesthetics. Includes tags/categories support and extensive features for code blocks such as live preview, line numbers, and code highlighting.`,
+        name: `gregjopa.com - Adventures in Web Development`,
+        short_name: `gregjopa.com`,
+        description: `Web development blog of Greg Jopa. Featuring articles about JavaScript and other interesting web technologies.`,
         start_url: `/`,
         background_color: `#fff`,
         theme_color: `#6B46C1`,
