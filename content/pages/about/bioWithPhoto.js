@@ -9,7 +9,7 @@ class BioWithPhoto extends Component {
       <div sx={{ display: "flex", flexDirection: ["column-reverse", "column-reverse", "row"] }}>
         <div sx={{ flex: 2 }}>{children}</div>
         <div sx={{ flex: 1, ml: [0, 0, 4], mb: [1, 2, 0] }}>
-          <img sx={{ maxWidth: "300px" }} src="/greg-jopa-outdoor-headshot.jpg"
+          <img sx={{ width: "300px", height: "450px" }} src="/greg-jopa-outdoor-headshot.jpg"
             alt="Headshot of Greg Jopa" />
         </div>
       </div>
