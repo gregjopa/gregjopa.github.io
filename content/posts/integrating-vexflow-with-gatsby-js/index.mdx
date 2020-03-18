@@ -1,0 +1,71 @@
+---
+title: Integrating Vexflow with Gatsby.js
+slug: 2020/03/integrating-vexflow-with-gatsby-js
+date: 2020-03-18 07:38:00
+tags:
+- Gatsby.js
+- Vexflow
+---
+
+import VexflowDemo from "./LoadableVexflow"
+
+My new blog is built with [Gatsby.js](https://www.gatsbyjs.org/) and my goal is to make easy to insert
+sheet music and guitar tab into blog posts. I'm a big fan of the [Vexflow Music Notation library](https://vexflow.com/)
+and for this post I'm going to explain how I got Vexflow working with Gatsby.
+
+### Demo
+
+I struggled a bit with server-side rendering, but eventually got it working! Here's the end result:
+
+<VexflowDemo width="700" height="180" />
+
+### Integration Details
+
+There are 3 things I had to do to get Vexflow working with Gatsby.js.
+
+1. [react-loadable](https://github.com/jamiebuilds/react-loadable) - The Gatsby framework renders everything
+  server-side and Vexflow does not play nicely by default. The Vexflow library depends on 'window' and several
+  other browser features. To work around this issue I used react-loadable to only load my VexflowDemo component on the client-side.
+
+  ```jsx
+  import React from "react"
+  import Loadable from "react-loadable"
+
+  export default Loadable({
+    // this "./VexflowDemo" component loads Vexflow and draws the sheet music
+    loader: () => import("./VexflowDemo"),
+    loading() {
+      return <div>Loading...</div>
+    }
+  })
+  ```
+
+2. [DOM Node Ref](https://reactjs.org/docs/refs-and-the-dom.html) - the Vexflow library takes care of the complex
+  rendering for creating sheet music. It just needs a specific container element to use. The 'ref' feature makes it easy to
+  share the container element with Vexflow without having to hardcode any id values.
+
+3. [useEffect Hook](https://reactjs.org/docs/hooks-effect.html) - the Vexflow rendering process requires
+  a DOM node reference so we need to make sure the DOM is ready. With React, we can accomplish this using 'useEffect' or 'componentDidMount()'.
+
+Here's a snippet showing how to use 'useEffect' with 'ref':
+
+```jsx
+function VexflowDemo(props) {
+  const notesContainerRef = React.useRef(null)
+
+  useEffect(() => {
+    if (notesContainerRef.current !== null) {
+      // this draw() function contains all Vexflow code for rendering the sheet music
+      draw(notesContainerRef.current, props)
+    }
+  })
+
+  return (
+    <div ref={notesContainerRef} />
+  )
+}
+```
+
+<hr />
+
+Check out the [full source code for this blog post](https://github.com/gregjopa/gregjopa.github.io/tree/source/content/posts/integrating-vexflow-with-gatsby-js).
