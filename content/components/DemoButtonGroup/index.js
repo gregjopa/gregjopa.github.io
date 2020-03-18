@@ -1,4 +1,4 @@
-import { Component } from "react"
+import React from "react"
 /** @jsx jsx */
 import { jsx, Container } from "theme-ui"
 
@@ -27,21 +27,18 @@ const Link = ({ href, text}) => {
   )
 }
 
-class DemoButtonGroup extends Component {
-  render() {
-    const { downloadLink, demoLink } = this.props
-    return (
-      <Container sx={{
-        maxWidth: "650px",
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "space-evenly"
-        }}>
-        <Link href={downloadLink} text="Download" />
-        <Link href={demoLink} text="Demo" />
-      </Container>
-    )
-  }
+function DemoButtonGroup ({ downloadLink, demoLink }) {
+  return (
+    <Container sx={{
+      maxWidth: "650px",
+      display: "flex",
+      flexWrap: "wrap",
+      justifyContent: "space-evenly"
+      }}>
+      <Link href={downloadLink} text="Download" />
+      <Link href={demoLink} text="Demo" />
+    </Container>
+  )
 }
 
 export default DemoButtonGroup
