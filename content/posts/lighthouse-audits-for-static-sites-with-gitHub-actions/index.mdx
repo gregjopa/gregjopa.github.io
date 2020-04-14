@@ -84,7 +84,7 @@ There are two options for configuring a performance budget with Lighthouse:
 
 1. budget.json - There's great work being done to standardize performance budgets across speed tools like Lighthouse and SpeedCurve.
 Check out the [budget.json spec](https://github.com/GoogleChrome/budget.json) for more details.
-2. assertions in lighthouserc.json - You can specify assertions directly in the lighthouserc.json file. These assertions are specific to Lighthouse. I chose this option because I wanted to have assertions for the differenct lighthouse categories.
+2. assertions in lighthouserc.json - You can specify assertions directly in the lighthouserc.json file. These assertions are specific to Lighthouse. I chose this option because I wanted to have assertions for the different lighthouse categories.
 
 Here's my lighthouserc.json file with assertions:
 
@@ -112,3 +112,6 @@ Here's my lighthouserc.json file with assertions:
   }
 }
 ```
+
+The [Lighthouse CI Assertions documentation](https://github.com/GoogleChrome/lighthouse-ci/blob/master/docs/assertions.md)
+goes into more detail about the features like asserting on specific audits and urls.
