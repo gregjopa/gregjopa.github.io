@@ -14,16 +14,16 @@
   },
   "dependencies": {
     "@lekoarts/gatsby-theme-minimal-blog": "^2.2.9",
-    "gatsby": "^2.20.18",
-    "gatsby-plugin-google-analytics": "^2.2.2",
-    "gatsby-plugin-manifest": "^2.3.3",
-    "gatsby-plugin-netlify": "^2.2.1",
-    "gatsby-plugin-offline": "^3.1.2",
-    "gatsby-plugin-sitemap": "^2.3.1",
+    "gatsby": "^2.20.29",
+    "gatsby-plugin-google-analytics": "^2.2.4",
+    "gatsby-plugin-manifest": "^2.3.6",
+    "gatsby-plugin-netlify": "^2.2.3",
+    "gatsby-plugin-offline": "^3.1.4",
+    "gatsby-plugin-sitemap": "^2.3.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-loadable": "^5.5.0",
-    "vexflow": "^1.2.93"
+    "vexflow": "^3.0.9"
   },
   "devDependencies": {
     "cross-env": "^7.0.2",
