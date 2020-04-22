@@ -10,8 +10,7 @@
     "develop": "gatsby develop",
     "start": "gatsby develop",
     "serve": "gatsby serve",
-    "clean": "gatsby clean",
-    "deploy": "gatsby build && gh-pages -d public -b master"
+    "clean": "gatsby clean"
   },
   "dependencies": {
     "@lekoarts/gatsby-theme-minimal-blog": "^2.2.9",
@@ -28,7 +27,6 @@
   },
   "devDependencies": {
     "cross-env": "^7.0.2",
-    "gatsby-plugin-webpack-bundle-analyser-v2": "^1.1.8",
-    "gh-pages": "^2.2.0"
+    "gatsby-plugin-webpack-bundle-analyser-v2": "^1.1.8"
   }
 }

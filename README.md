@@ -8,4 +8,3 @@ Personal website built with [Gatsby](https://www.gatsbyjs.org/) using this start
 * `gatsby develop`
 * `gatsby build`
 * `gatsby serve`
-* `npm run deploy`
