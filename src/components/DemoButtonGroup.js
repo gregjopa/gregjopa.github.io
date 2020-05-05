@@ -6,7 +6,7 @@ const Link = ({ href, text}) => {
   return (
     <a href={href} target="_blank" rel="noopener noreferrer"
       sx={{
-        width: "225px",
+        minWidth: "225px",
         fontSize: 2,
         px: 5,
         py: 3,
@@ -26,7 +26,7 @@ const Link = ({ href, text}) => {
   )
 }
 
-function DemoButtonGroup ({ downloadLink, demoLink }) {
+function DemoButtonGroup ({ downloadLink, demoLink, downloadText = "Download", demoText = "Demo" }) {
   return (
     <Container sx={{
       maxWidth: "650px",
@@ -34,8 +34,8 @@ function DemoButtonGroup ({ downloadLink, demoLink }) {
       flexWrap: "wrap",
       justifyContent: "space-evenly"
       }}>
-      <Link href={downloadLink} text="Download" />
-      <Link href={demoLink} text="Demo" />
+      <Link href={downloadLink} text={downloadText} />
+      <Link href={demoLink} text={demoText} />
     </Container>
   )
 }
