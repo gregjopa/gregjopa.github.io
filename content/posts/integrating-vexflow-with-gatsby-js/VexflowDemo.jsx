@@ -50,10 +50,10 @@ function draw(container, { width, height }) {
     new VF.StaveNote({clef: "percussion", keys: ["c/5"], duration: "16" })
   ]
 
-  notes[0].addArticulation(0, new VF.Articulation("a>").setPosition(3))
-  notes[4].addArticulation(0, new VF.Articulation("a>").setPosition(3))
-  notes[8].addArticulation(0, new VF.Articulation("a>").setPosition(3))
-  notes[12].addArticulation(0, new VF.Articulation("a>").setPosition(3))
+  notes[0].addModifier(new VF.Articulation("a>").setPosition(3))
+  notes[4].addModifier(new VF.Articulation("a>").setPosition(3))
+  notes[8].addModifier(new VF.Articulation("a>").setPosition(3))
+  notes[12].addModifier(new VF.Articulation("a>").setPosition(3))
 
   var beams = VF.Beam.generateBeams(notes, { stem_direction: 1 })
   Vex.Flow.Formatter.FormatAndDraw(context, stave, notes)
