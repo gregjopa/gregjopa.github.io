@@ -15,4 +15,3 @@ jobs:
         with:
           access-token: ${{ secrets.GH_PAT }}
           deploy-branch: master
-

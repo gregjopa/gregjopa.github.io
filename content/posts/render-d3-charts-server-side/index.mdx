@@ -3,9 +3,9 @@ title: Render D3.js Charts Server-side
 slug: 2020/05/render-d3-charts-server-side
 date: 2020-05-05 10:15:19
 tags:
-- JavaScript
-- Node.js
-- D3.js
+  - JavaScript
+  - Node.js
+  - D3.js
 ---
 
 import DemoButtonGroup from "../../../src/components/DemoButtonGroup";
@@ -28,11 +28,11 @@ First install D3 with npm `npm install d3`. The [D3 library was re-written in ve
 2. require just the modules you need. Ex:
 
 ```javascript
-const d3 = Object.assign({},
-  require('d3-selection').
-  require('d3-scale'),
-  require('d3-axis'),
-  require('d3-array')
+const d3 = Object.assign(
+  {},
+  require("d3-selection").require("d3-scale"),
+  require("d3-axis"),
+  require("d3-array")
 );
 ```
 
@@ -40,14 +40,13 @@ The [d3-selection](https://github.com/d3/d3-selection) module depends on the DOM
 Luckily we can use [JSDOM](https://github.com/jsdom/jsdom) to get d3-selection working in Node-land.
 
 ```javascript
-const jsdom = require('jsdom');
+const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 // create a new JSDOM instance for d3-selection to use
 const document = new JSDOM().window.document;
 
-d3.select(document.body)
-  .append('div')
-  // and so on
+d3.select(document.body).append("div");
+// and so on
 ```
 
 JSDOM is commonly used for unit testing modules that rely on the DOM. That way you can unit test client-side code without a browser.
@@ -62,10 +61,10 @@ barChartHelper.getBarChart({
   data: fixtureData,
   width: 400,
   height: 300,
-  xAxisLabel: '2012',
-  yAxisLabel: 'Views',
-  containerId: 'bar-chart-small'
-})
+  xAxisLabel: "2012",
+  yAxisLabel: "Views",
+  containerId: "bar-chart-small",
+});
 ```
 
 At the time of this writing it's using D3 version 5 and Node.js version 12. Check out the source code on GitHub:

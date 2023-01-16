@@ -24,4 +24,4 @@ jobs:
           uploadArtifacts: true
           temporaryPublicStorage: true
           runs: 3
-          configPath: '.github/workflows/lighthouserc.json'
+          configPath: ".github/workflows/lighthouserc.json"

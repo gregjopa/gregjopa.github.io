@@ -4,8 +4,8 @@ slug: 2011/02/asp-net-mvc-3-with-jquery-mobile-and-google-maps
 date: 2011-02-08 22:02:00
 comments: true
 categories:
-- ASP.NET
-- JavaScript
+  - ASP.NET
+  - JavaScript
 ---
 
 ![jQuery Mobile Google Maps](./jquerymobile_googlemaps_screenshot.jpg)
@@ -24,8 +24,7 @@ My ASP.NET MVC 3 project uses jQuery Mobile 1.0 Alpha 3 and Google Maps API 3. M
 
 First, I created a _Location.cs_ class based on the structure of my _Locations.xml_ file.
 
-
-``` xml
+```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <locations>
 
@@ -43,8 +42,7 @@ First, I created a _Location.cs_ class based on the structure of my _Locations.x
     <name>Apple</name>...
 ```
 
-
-``` c#
+```c#
 public class Location
 {
     public Location(int id, string name, string address, string city, string state, string zip)
@@ -68,11 +66,9 @@ public class Location
 }
 ```
 
-
 I also created a _LocationModel.cs_ class which uses LINQ to read the XML file and append each Location to a List of Location objects.
 
-
-``` c#
+```c#
 public LocationModel()
 {
     // Linq to read XML data and create a List of Location objects
@@ -85,13 +81,11 @@ public LocationModel()
 }
 ```
 
-
 ## Controller
 
 I have one Controller named _HomeController.cs_ which creates an instance of LocationModel at the class level and returns all locations to the Index View. It also looks up specific locations for the Map View based on the unique ID passed in the url to the Map method.
 
-
-``` c#
+```c#
 LocationModel allLocs = new LocationModel();
 
 public ActionResult Index()
@@ -130,11 +124,9 @@ private Location getLocation(int id)
 }
 ```
 
-
 I am using Google's GeoCoding API to look up the Lat and Long for an address so it can be plotted on the map. I am requesting the results in an xml format and parsing them using LINQ. If the lookupGeoCode() method fails at getting the Lat and Long it returns false and the Map method returns the Error View.
 
-
-``` c#
+```c#
 // uses Google GeoCoding API to lookup Lat and Long for an address (http://code.google.com/apis/maps/documentation/geocoding/)
 private Boolean lookupGeoCode(Location loc)
 {
@@ -160,66 +152,69 @@ private Boolean lookupGeoCode(Location loc)
 }
 ```
 
-
 ## View
 
-I am using the new Razor view engine which is available with ASP.NET MVC 3. I have two Views, Index and Map, which are both strongly-typed. The <em>_Layout.cshtml</em> is my master page and in order to get Google Maps working with jQuery Mobile I had to put the JavaScript reference to the Google Maps API here along with the css style for the map.
+I am using the new Razor view engine which is available with ASP.NET MVC 3. I have two Views, Index and Map, which are both strongly-typed. The <em>\_Layout.cshtml</em> is my master page and in order to get Google Maps working with jQuery Mobile I had to put the JavaScript reference to the Google Maps API here along with the css style for the map.
 
-*_Layout.cshtml*
-``` html
+_\_Layout.cshtml_
+
+```html
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <!--Developed by Greg Jopa on 2/5/2011 - http://www.gregjopa.com/2011/02/asp-net-mvc-3-with-jquery-mobile-and-google-maps/ -->
     <title>@ViewBag.Title</title>
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a3/jquery.mobile-1.0a3.min.css" />
+    <link
+      rel="stylesheet"
+      href="http://code.jquery.com/mobile/1.0a3/jquery.mobile-1.0a3.min.css"
+    />
     <script src="http://code.jquery.com/jquery-1.5.min.js"></script>
     <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
     <script src="http://code.jquery.com/mobile/1.0a3/jquery.mobile-1.0a3.min.js"></script>
     <style type="text/css">
-        body { background: #dddddd;}
-    .gmap { height: 330px; width: 100%; margin: 0px; padding: 0px }
-  </style>
-</head>
-<body>
+      body {
+        background: #dddddd;
+      }
+      .gmap {
+        height: 330px;
+        width: 100%;
+        margin: 0px;
+        padding: 0px;
+      }
+    </style>
+  </head>
+  <body>
     @RenderBody()
-</body>
+  </body>
 </html>
 ```
-
 
 My Index View returns a hyperlink for each location.
 
 _Index.cshtml_
 
-
-``` html
-@using jQueryMobileMVC3.Helpers
-
-@model IEnumerable<jQueryMobileMVC3.Models.Location>
-
-@{
-    ViewBag.Title = "jQuery Mobile w/ Google Maps";
-}
-<div data-role="page" class="page-home">
-
+```html
+@using jQueryMobileMVC3.Helpers @model
+IEnumerable<jQueryMobileMVC3.Models.Location>
+  @{ ViewBag.Title = "jQuery Mobile w/ Google Maps"; }
+  <div data-role="page" class="page-home">
     <div data-role="header" data-theme="b">
-        <h1>Silicon Valley</h1>
+      <h1>Silicon Valley</h1>
     </div>
 
     <div data-role="content">
-
-        <ul data-role="listview" data-inset="true">
-            @foreach (var item in Model)
-            {
-                <li>@Html.ActionLink((string)item.Name, "Map", "Home", new { id = item.ID }, null).AutoRemoveAlias()</li>
-            }
-        </ul>
-
+      <ul data-role="listview" data-inset="true">
+        @foreach (var item in Model) {
+        <li>
+          @Html.ActionLink((string)item.Name, "Map", "Home", new { id = item.ID
+          }, null).AutoRemoveAlias()
+        </li>
+        }
+      </ul>
     </div>
-</div>
+  </div></jQueryMobileMVC3.Models.Location
+>
 ```
-
 
 I am using Html.ActionLink to generate my hyperlinks and talk to my controller. When publishing this ASP.NET MVC Project to my GoDaddy shared hosting I ran into a problem with my hyperlinks including the directory path aliased to my subdomain name which made the url long and ugly. The relative url returned by Html.ActionLink was including /gregjopa/code/ which is aliased to code.gregjopa.com. So my url originally looked like:
 
@@ -235,8 +230,7 @@ http://code.gregjopa.com/mvc/jquerymobile/gmaps/#Home/Map/1
 
 I originally tried to fix this by using the URL Rewrite Module available in IIS 7 but I couldn't get this working with my GoDaddy hosting. So instead I created a helper method to remove the unwanted portion of the url generated by the Html.ActionLink method.
 
-
-``` c#
+```c#
 /* Helper methods to remove the aliased directory added to the url for each hyperlink
      * Code adapted from the following stackoverflow.com post: http://stackoverflow.com/questions/604814/asp-net-mvc-actionlinks-and-shared-hosting-aliased-domains
      */
@@ -256,21 +250,17 @@ I originally tried to fix this by using the URL Rewrite Module available in IIS 
     }
 ```
 
-
 The Map View includes the JavaScript for Google Maps. You cannot use document.ready() when using jQuery Mobile. Instead you must use specific jQuery Mobile page events to inject code into the DOM. My app uses the pagecreate, pageshow, and pagehide events to execute JavaScript. I had to add an id to each page so it could be uniquely referenced in the jQuery Mobile events. Also, in order to have a separate map on each page I had to use unique JavaScript variable names when defining each map.
 
 _Map.cshtml_
 
-
-``` html
+```html
 <div data-role="page" id="page-map@(Model.ID.ToString())">
-
   <div data-role="header" data-theme="b">
-        <h1>@Model.Name</h1>
+    <h1>@Model.Name</h1>
   </div>
 
   <div data-role="content">
-
     <div id="map@(Model.ID.ToString())" class="gmap"></div>
 
     <script type="text/javascript">
@@ -320,13 +310,10 @@ _Map.cshtml_
             //console.log("pagehide");
             infowindow@(Model.ID.ToString()).close();
       });
-
     </script>
-
   </div>
 </div>
 ```
-
 
 ## Conclusion
 
