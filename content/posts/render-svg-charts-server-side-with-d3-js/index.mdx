@@ -15,7 +15,7 @@ import Alert from "../../../src/components/Alert";
   <strong>Update: </strong>
   This blog post is really old.
   Here's a more recent post about this topic: <br />
-  <a href="/2020/05/render-d3-charts-server-side" style="margin-top: 1rem; display: inline-block;">
+  <a href="/2020/05/render-d3-charts-server-side" style={{ marginTop: "1rem", display: "inline-block" }}>
     Render D3.js charts server-side with Node version 12+
   </a>
 </Alert>
@@ -25,8 +25,6 @@ import Alert from "../../../src/components/Alert";
 It's common to use d3.js to render svg charts on the client-side. With the d3 node module you can render svg charts on the server-side as well. The d3 node module uses jsdom to simulate the browser's Document Object Model (DOM) which allows for d3 selectors to work on the server-side.
 
 Running D3 on the server with Node.js is pretty easy. You can reuse most of your client-side d3 code on the server. The only tricky part is integrating d3 widgets into your server-side views.
-
-<!--more-->
 
 <DemoButtonGroup
   downloadLink="https://github.com/gregjopa/d3-server-side-demo"
