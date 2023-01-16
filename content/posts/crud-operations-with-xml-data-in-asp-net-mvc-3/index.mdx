@@ -4,7 +4,7 @@ slug: 2011/04/crud-operations-with-xml-data-in-asp-net-mvc-3
 date: 2011-04-05 23:33:00
 comments: true
 tags:
-- ASP.NET
+  - ASP.NET
 ---
 
 ![CRUD Operations with XML Data in ASP.NET MVC 3](./CRUD_Operations_screenshot.jpg)
@@ -21,8 +21,7 @@ My ASP.NET MVC 3 Billing App uses the [Repository pattern](https://msdn.microsof
 
 I created a _Billing.cs_ class based on the structure of my _Billings.xml_ file.
 
-
-``` xml
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <billing>
 
@@ -39,11 +38,9 @@ I created a _Billing.cs_ class based on the structure of my _Billings.xml_ file.
         <customer>Dunder Mifflin</customer>...
 ```
 
-
 In my _Billing.cs_ class I used the System.ComponentModel.DataAnnotations namespace for adding validation to my model properties.
 
-
-``` c#
+```c#
 public class Billing
 {
     public Billing()
@@ -80,11 +77,9 @@ public class Billing
 }
 ```
 
-
 My model folder also contains my interface _IBillingRepository.cs_.
 
-
-``` c#
+```c#
 public interface IBillingRepository
 {
     IEnumerable<Billing> GetBillings();
@@ -95,11 +90,9 @@ public interface IBillingRepository
 }
 ```
 
-
 And all the heavy lifting is done by my _BillingRepository.cs_ class.
 
-
-``` c#
+```c#
 public class BillingRepository: IBillingRepository
 {
     private List<Billing> allBillings;
@@ -165,13 +158,11 @@ public class BillingRepository: IBillingRepository
 }
 ```
 
-
 ## Controller
 
 I have one Controller named _BillingController.cs_ which interacts with my repository and contains get and post requests for performing CRUD operations. By using the _ModelState.AddModelError()_ method I am able to display Exception error messages in red font for any failed CRUD operations.
 
-
-``` c#
+```c#
 public class BillingController : Controller
 {
     private IBillingRepository _repository;
@@ -290,15 +281,13 @@ public class BillingController : Controller
 }
 ```
 
-
 ## View
 
 My Views are standard since they use the default T4 scaffolding templates (Create, Delete, Details, Edit, and List). One thing I added to my Create and Edit Views was the jQuery UI date picker. With ASP.NET MVC the Scripts and Content folders come with the jQuery UI base theme installed by default. To utilize jQuery UI I added an optional _RenderSection_ to my layout master page in the head for adding the jQuery UI stylesheet to specific Views. All I had to do was add the jQuery UI stylesheet and JavaScript code to the Create and Edit Views to get the date picker up and running.
 
-*_Layout.cshtml* optional RenderSection tag
+_\_Layout.cshtml_ optional RenderSection tag
 
-
-``` html
+```html
 <html>
 <head>
     <title>@ViewBag.Title</title>
@@ -327,7 +316,6 @@ My Views are standard since they use the default T4 scaffolding templates (Creat
     });
 </script>
 ```
-
 
 ## Conclusion
 

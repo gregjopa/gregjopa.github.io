@@ -1,44 +1,54 @@
 /** @jsx jsx */
-import type { HeadFC, PageProps } from "gatsby"
-import * as React from "react"
-import { jsx, Heading } from "theme-ui"
-import Layout from "@lekoarts/gatsby-theme-minimal-blog/src/components/layout"
-import ItemTags from "@lekoarts/gatsby-theme-minimal-blog/src/components/item-tags"
-import Seo from "@lekoarts/gatsby-theme-minimal-blog/src/components/seo"
-import PostFooter from "@lekoarts/gatsby-theme-minimal-blog/src/components/post-footer"
+import type { HeadFC, PageProps } from "gatsby";
+import * as React from "react";
+import { jsx, Heading } from "theme-ui";
+import Layout from "@lekoarts/gatsby-theme-minimal-blog/src/components/layout";
+import ItemTags from "@lekoarts/gatsby-theme-minimal-blog/src/components/item-tags";
+import Seo from "@lekoarts/gatsby-theme-minimal-blog/src/components/seo";
+import PostFooter from "@lekoarts/gatsby-theme-minimal-blog/src/components/post-footer";
 
 export type MBPostProps = {
   post: {
-    slug: string
-    title: string
-    date: string
+    slug: string;
+    title: string;
+    date: string;
     tags?: {
-      name: string
-      slug: string
-    }[]
-    description?: string
-    canonicalUrl?: string
-    excerpt: string
-    timeToRead?: number
+      name: string;
+      slug: string;
+    }[];
+    description?: string;
+    canonicalUrl?: string;
+    excerpt: string;
+    timeToRead?: number;
     banner?: {
       childImageSharp: {
         resize: {
-          src: string
-        }
-      }
-    }
-  }
-}
+          src: string;
+        };
+      };
+    };
+  };
+};
 
-const px = [`16px`, `8px`, `4px`]
-const shadow = px.map((v) => `rgba(0, 0, 0, 0.1) 0px ${v} ${v} 0px`)
+const px = [`16px`, `8px`, `4px`];
+const shadow = px.map((v) => `rgba(0, 0, 0, 0.1) 0px ${v} ${v} 0px`);
 
-const Post: React.FC<React.PropsWithChildren<PageProps<MBPostProps>>> = ({ data: { post }, children }) => (
+const Post: React.FC<React.PropsWithChildren<PageProps<MBPostProps>>> = ({
+  data: { post },
+  children,
+}) => (
   <Layout>
     <Heading as="h1" variant="styles.h1">
       {post.title}
     </Heading>
-    <p sx={{ color: `secondary`, mt: 3, a: { color: `secondary` }, fontSize: [1, 1, 2] }}>
+    <p
+      sx={{
+        color: `secondary`,
+        mt: 3,
+        a: { color: `secondary` },
+        fontSize: [1, 1, 2],
+      }}
+    >
       <time>{post.date}</time>
       {post.tags && (
         <React.Fragment>
@@ -65,9 +75,9 @@ const Post: React.FC<React.PropsWithChildren<PageProps<MBPostProps>>> = ({ data:
     </section>
     <PostFooter post={post} />
   </Layout>
-)
+);
 
-export default Post
+export default Post;
 
 export const Head: HeadFC<MBPostProps> = ({ data: { post } }) => (
   <Seo
@@ -77,4 +87,4 @@ export const Head: HeadFC<MBPostProps> = ({ data: { post } }) => (
     pathname={post.slug}
     canonicalUrl={post.canonicalUrl}
   />
-)
+);

@@ -1,5 +1,7 @@
-import type { GatsbySSR } from "gatsby"
+import type { GatsbySSR } from "gatsby";
 
-export const onRenderBody: GatsbySSR["onRenderBody"] = ({ setHtmlAttributes }) => {
-  setHtmlAttributes({ lang: `en` })
-}
+export const onRenderBody: GatsbySSR["onRenderBody"] = ({
+  setHtmlAttributes,
+}) => {
+  setHtmlAttributes({ lang: `en` });
+};

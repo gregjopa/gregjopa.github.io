@@ -1,10 +1,13 @@
 /** @jsx jsx */
-import { jsx, Container } from "theme-ui"
+import { jsx, Container } from "theme-ui";
 
-const Link = ({ href, text}) => {
-  if (!href) return null
+const Link = ({ href, text }) => {
+  if (!href) return null;
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer"
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
       sx={{
         minWidth: "225px",
         fontSize: 2,
@@ -19,25 +22,34 @@ const Link = ({ href, text}) => {
         textDecoration: "none",
         ":hover, :focus": {
           backgroundColor: "primary",
-          color: "white"
-        }
+          color: "white",
+        },
       }}
-    >{text}</a>
-  )
-}
+    >
+      {text}
+    </a>
+  );
+};
 
-function DemoButtonGroup ({ downloadLink, demoLink, downloadText = "Download", demoText = "Demo" }) {
+function DemoButtonGroup({
+  downloadLink,
+  demoLink,
+  downloadText = "Download",
+  demoText = "Demo",
+}) {
   return (
-    <Container sx={{
-      maxWidth: "650px",
-      display: "flex",
-      flexWrap: "wrap",
-      justifyContent: "space-evenly"
-      }}>
+    <Container
+      sx={{
+        maxWidth: "650px",
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "space-evenly",
+      }}
+    >
       <Link href={downloadLink} text={downloadText} />
       <Link href={demoLink} text={demoText} />
     </Container>
-  )
+  );
 }
 
-export default DemoButtonGroup
+export default DemoButtonGroup;

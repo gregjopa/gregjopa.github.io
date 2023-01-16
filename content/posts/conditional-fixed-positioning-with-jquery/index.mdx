@@ -4,7 +4,7 @@ slug: 2011/07/conditional-fixed-positioning-with-jquery
 date: 2011-07-21 00:16:00
 comments: true
 tags:
-- JavaScript
+  - JavaScript
 ---
 
 import DemoButtonGroup from "../../../src/components/DemoButtonGroup";
@@ -32,12 +32,10 @@ This technique requires executing code every time the user scrolls the page. It 
 
 Luckily "Cowboy" Ben Alman has an easy to use jQuery plugin that solves this problem by throttling the scroll event. You can read about and download Ben's plugin here: [http://benalman.com/projects/jquery-throttle-debounce-plugin/"](http://benalman.com/projects/jquery-throttle-debounce-plugin/). With this plugin you can specify how much to delay the execution of your code that's attached to the scroll event:
 
-
-``` javascript
+```javascript
 // using Cowboy's jQuery throttle/debounce plugin
-view.bind("scroll resize", $.throttle( 100, stickyNavCheck ) );
+view.bind("scroll resize", $.throttle(100, stickyNavCheck));
 ```
-
 
 ## Horizontal Scrolling
 
@@ -47,20 +45,17 @@ If your browser window is smaller than the width of the website a horizontal scr
 
 To fix this issue with the horizontal scrollbar you need to check and see if the user has horizontally scrolled the page and if so update the _left_ css property of the fixed element. Here is the code I used to keep the fixed side navigation aligned:
 
-
-``` javascript
+```javascript
 // called on window scroll event and on window resize event
 function horizontalScrollCheck() {
   // update when horizontal scrollbar exists and is scrolled
   if (view.scrollLeft() > 0) {
-    sidenav.css('left', (-1 * view.scrollLeft() + 8));
-  }
-  else if (sidenav.css('left') != sidenavWrapperOffset.left) {
-    sidenav.css('left', sidenavWrapperOffset.left);
+    sidenav.css("left", -1 * view.scrollLeft() + 8);
+  } else if (sidenav.css("left") != sidenavWrapperOffset.left) {
+    sidenav.css("left", sidenavWrapperOffset.left);
   }
 }
 ```
-
 
 ## IE6 and Quirks doctype
 
@@ -68,10 +63,9 @@ Fixed positioning is not available in IE6 or in any version of IE if you're stuc
 
 However, this IE fixed positioning hack has a couple drawbacks. It requires setting the height and width of the body element to 100% and disabling the default browser scroll bars. This essentially hides the browser window object and replaces it with a fullscreen div tag. When testing this technique I came across a couple problems with it:
 
-* You can not scroll the webpage with the keyboard by default. Instead the fullscreen div has to be given focus by tabbing to it or clicking on it in order to use the up and down arrow keys to scroll the page.
+- You can not scroll the webpage with the keyboard by default. Instead the fullscreen div has to be given focus by tabbing to it or clicking on it in order to use the up and down arrow keys to scroll the page.
 
-* The jQuery scrolltop() method is commonly used by many jQuery plugins to get the current height of the browser's vertical scrollbar. Since this scrollbar is disabled the $(window).scrollTop() method will always return zero. For example, the [Fancybox](http://fancybox.net/) plugin will not work with this fixed positioning hack.
-
+- The jQuery scrolltop() method is commonly used by many jQuery plugins to get the current height of the browser's vertical scrollbar. Since this scrollbar is disabled the $(window).scrollTop() method will always return zero. For example, the [Fancybox](http://fancybox.net/) plugin will not work with this fixed positioning hack.
 
 Due to these problems and the fact that IE 6 is incredibly old I would recommend not using this hack. In IE 6 fixed positioning defaults to absolute positioning which can really screw up your page. So you can disable the fixed positioning js code for IE 6 using feature detection.
 
@@ -81,7 +75,7 @@ Due to these problems and the fact that IE 6 is incredibly old I would recommend
 
 This css fixed positioning test works great for IE 6 but it doesn't appear to work with iOS and Android. Argh... :(
 
-Fixed positioning is technically supported on mobile safari but it doesn't work like the way it does on desktop browsers. You can read more about this problem on the Apple Developer site here: [https://developer.apple.com/library/content/technotes/tn2010/tn2262/_index.html#//apple_ref/doc/uid/DTS40009577-CH1-SAFARI_ON_IPAD_READINESS_CHECKLIST-4__MODIFY_CODE_THAT_RELIES_ON_CSS_FIXED_POSITIONING](https://developer.apple.com/library/content/technotes/tn2010/tn2262/_index.html#//apple_ref/doc/uid/DTS40009577-CH1-SAFARI_ON_IPAD_READINESS_CHECKLIST-4__MODIFY_CODE_THAT_RELIES_ON_CSS_FIXED_POSITIONING)
+Fixed positioning is technically supported on mobile safari but it doesn't work like the way it does on desktop browsers. You can read more about this problem on the Apple Developer site here: [https://developer.apple.com/library/content/technotes/tn2010/tn2262/\_index.html#//apple_ref/doc/uid/DTS40009577-CH1-SAFARI_ON_IPAD_READINESS_CHECKLIST-4\_\_MODIFY_CODE_THAT_RELIES_ON_CSS_FIXED_POSITIONING](https://developer.apple.com/library/content/technotes/tn2010/tn2262/_index.html#//apple_ref/doc/uid/DTS40009577-CH1-SAFARI_ON_IPAD_READINESS_CHECKLIST-4__MODIFY_CODE_THAT_RELIES_ON_CSS_FIXED_POSITIONING)
 
 Here is how fixed positioning displays in the demo on my iPad before I disabled it by checking the user agent string for iOS devices (notice how the fixed side navigation jumped halfway off the screen instead of floating at the top of the the viewport):
 
@@ -92,7 +86,6 @@ Unfortunately fixed positioning has made it to [Modernizr's list of undetectable
 If you don't want to use browser sniffing and want your fixed positioning element to fail a bit more gracefully there is another option. You could duplicate the markup for the element you want to be conditionally fixed positioned. Then just show/hide the fixed position version of the element based on the scrollbar position. This will still cause the fixed position element to jump offscreen when it is displayed on an iOS device but the original static positioned version of the element will remain in the document flow and will make the issue less noticeable. Check out the source code on Khan Academy's site and you will see that this is how they implement their conditional fixed positioned menu.
 
 And if you really want to get fixed positioning working on your mobile device then try using the iScroll js library. Check it out here to see if it will work for your project: [http://cubiq.org/iscroll-4](http://cubiq.org/iscroll-4)
-
 
 ## Conclusion
 

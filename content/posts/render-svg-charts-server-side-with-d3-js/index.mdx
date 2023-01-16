@@ -4,8 +4,8 @@ slug: 2013/11/render-svg-charts-server-side-with-d3-js
 date: 2013-11-25 20:25:19
 comments: true
 tags:
-- JavaScript
-- Node.js
+  - JavaScript
+  - Node.js
 ---
 
 import DemoButtonGroup from "../../../src/components/DemoButtonGroup";
@@ -13,9 +13,11 @@ import Alert from "../../../src/components/Alert";
 
 <Alert>
   <strong>Update: </strong>
-  This blog post is really old.
-  Here's a more recent post about this topic: <br />
-  <a href="/2020/05/render-d3-charts-server-side" style={{ marginTop: "1rem", display: "inline-block" }}>
+  This blog post is really old. Here's a more recent post about this topic: <br />
+  <a
+    href="/2020/05/render-d3-charts-server-side"
+    style={{ marginTop: "1rem", display: "inline-block" }}
+  >
     Render D3.js charts server-side with Node version 12+
   </a>
 </Alert>
@@ -26,9 +28,7 @@ It's common to use d3.js to render svg charts on the client-side. With the d3 no
 
 Running D3 on the server with Node.js is pretty easy. You can reuse most of your client-side d3 code on the server. The only tricky part is integrating d3 widgets into your server-side views.
 
-<DemoButtonGroup
-  downloadLink="https://github.com/gregjopa/d3-server-side-demo"
-/>
+<DemoButtonGroup downloadLink="https://github.com/gregjopa/d3-server-side-demo" />
 
 ## Getting started with running D3 on Node.js
 
@@ -36,19 +36,17 @@ Install the d3 node module using npm: `npm install d3`. The d3 node module uses 
 
 After you get d3 installed you can require it like any other node module:
 
-``` javascript
-var d3 = require('d3');
+```javascript
+var d3 = require("d3");
 ```
-
 
 ## Reusable Chart Pattern
 
 I recommend using the reusable chart design pattern for your charts: [http://bost.ocks.org/mike/chart/](http://bost.ocks.org/mike/chart/). This modular pattern works great on the client and on the server. Since the reusable chart pattern is just a function you can assign it directly to module.exports:
 
-``` javascript
+```javascript
 var barChart = module.exports = function() { ...
 ```
-
 
 ## D3 View Helper
 
@@ -56,9 +54,8 @@ My demo app uses the [express.js](http://expressjs.com/) web framework with the 
 
 #### bar_chart_helper.js
 
-``` javascript
+```javascript
 var getBarChart = function (params) {
-
   var chart = barChart()
     .data(params.data)
     .width(params.width)
@@ -66,11 +63,10 @@ var getBarChart = function (params) {
     .xAxisLabel(params.xAxisLabel)
     .yAxisLabel(params.yAxisLabel);
 
-
   // append to jsdom
-  d3.select('body').append('div').attr('id', params.containerId).call(chart);
+  d3.select("body").append("div").attr("id", params.containerId).call(chart);
 
-  var selector = '#' + params.containerId;
+  var selector = "#" + params.containerId;
 
   // get html string "<div id="bar-chart-small"><svg class="svg-chart"> ..."
   var svg = d3.select(selector).node().outerHTML;
@@ -79,25 +75,16 @@ var getBarChart = function (params) {
   d3.select(selector).remove();
 
   return svg;
-
 };
 ```
 
 #### index.html
 
-``` html
+```html
 <!-- ejs template -->
 <h1>D3 Server-side Demo</h1>
-<%-
-  barChartHelper.getBarChart({
-    data: fixtureData,
-    width: 400,
-    height: 300,
-    xAxisLabel: '2012',
-    yAxisLabel: 'Views',
-    containerId: 'bar-chart-small'
-  })
-%>
+<%- barChartHelper.getBarChart({ data: fixtureData, width: 400, height: 300,
+xAxisLabel: '2012', yAxisLabel: 'Views', containerId: 'bar-chart-small' }) %>
 ```
 
 To see this code in action download my d3-server-side-demo express.js app here: [https://github.com/gregjopa/d3-server-side-demo](https://github.com/gregjopa/d3-server-side-demo)

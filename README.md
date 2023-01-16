@@ -5,6 +5,6 @@ Personal website built with [Gatsby](https://www.gatsbyjs.org/) using this start
 
 ## Commands
 
-* `gatsby develop`
-* `gatsby build`
-* `gatsby serve`
+- `gatsby develop`
+- `gatsby build`
+- `gatsby serve`
