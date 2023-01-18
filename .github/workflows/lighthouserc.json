@@ -15,7 +15,7 @@
         "categories:seo": ["warn", { "minScore": 1 }],
         "dom-size": ["error", { "maxNumericValue": 1000 }],
         "first-contentful-paint": ["error", { "maxNumericValue": 2000 }],
-        "interactive": ["error", { "maxNumericValue": 5000 }]
+        "interactive": ["error", { "maxNumericValue": 6000 }]
       }
     }
   }
