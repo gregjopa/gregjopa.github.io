@@ -133,6 +133,17 @@ const config: GatsbyConfig = {
         ],
       },
     },
+    {
+      resolve: `gatsby-plugin-google-gtag`,
+      options: {
+        trackingIds: ["G-K91Y4WP4BG"],
+      },
+      gtagConfig: {
+        send_page_view: true,
+      },
+      pluginConfig: {},
+    },
+
     shouldAnalyseBundle && {
       resolve: `gatsby-plugin-webpack-bundle-analyser-v2`,
       options: {
