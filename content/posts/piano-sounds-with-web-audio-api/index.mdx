@@ -1,0 +1,148 @@
+---
+title: Playing Piano Sounds with the Web Audio API
+slug: 2023/03/piano-sounds-with-web-audio-api
+date: 2023-03-22 17:01:00
+tags:
+  - Web Audio Api
+  - Sound Design
+---
+
+import DemoButtonGroup from "../../../src/components/DemoButtonGroup";
+
+[In my last post I shared the Piano Flash Card app](/2023/01/piano-flash-cards-react-app) I built with React and Vexflow. In this post I'll share how I used the Web Audio API to add audio to this app to play realistic piano sounds.
+
+<DemoButtonGroup
+  downloadLink="https://github.com/gregjopa/piano-flash-cards"
+  downloadText="Source code"
+  demoLink="https://www.gregjopa.com/piano-flash-cards/"
+  demoText="Play the game"
+/>
+
+### Goals with adding Audio
+
+Here's what I wanted to accomplish with adding sound to this flash card app:
+
+1. When guessing the note name, play the sound of the note so users can tie the sound to the visual representation of the note on the treble/bass clef.
+2. Play a happy sound when the user guesses the correct note and play a sad sound for incorrect guesses.
+3. Update the keyboard to be interactive so it plays the note when the key is pressed.
+
+### Using Audio Samples
+
+For this project, I wanted the audio to sound like a piano as much as possible. At first, I considered synthesizing notes using oscillators and filters but that proved to be quite difficult to produce something that resembles a piano. So instead, I chose to use free audio samples that were recorded from a real piano.
+I searched around the internet and found piano sounds that were recorded from a Yamaha C5 Grand Piano. These Salamander Grand Piano samples were created by Alexander Holm under the Creative Commons license. Here are the relevant links:
+
+- https://archive.org/details/SalamanderGrandPianoV3
+- https://sfzinstruments.github.io/pianos/salamander
+- https://github.com/sfzinstruments/SalamanderGrandPiano/
+
+I added these samples to my app and decided to support mp3 and ogg file formats to attempt to support as many browsers as possible. Here's an example of how we can load a sample and play it with the Web Audio API:
+
+```js
+fetch("/piano-flash-cards/audio/C4v10.mp3")
+  .then((response) => response.arrayBuffer())
+  .then((buffer) => audioContext.decodeAudioData(buffer))
+  .then((sample) => {
+    const source = audioContext.createBufferSource();
+    source.buffer = sample;
+    source.connect(audioContext.destination);
+    source.start(0);
+  });
+```
+
+One thing I wanted to avoid was forcing the user to download 88 different samples to support the 88 possible notes on a piano. I do not want users to have to download 88 different mp3 files. This is where pitch shifting comes in. I can leverage a single sample to play multiple different notes by shifting the pitch of the sound.
+
+### Pitch Shifting with the Web Audio API
+
+[Pitch shifting](https://en.wikipedia.org/wiki/Pitch_shift) is a technique that can raise or lower the pitch of a sound. To strike a balance between sound quality and performance, I chose to pitch shift a single sample to play up to 12 different notes. That way 700 cents is the most I will have to shift the pitch of a note. The concern is that anything more will reduce the quality of the piano sound.
+
+Here's an example to help illustrate the pitch shifting strategy. Let's assume we have a sample playing a C note on the 4th octave. We can give this C4 note a value of 0 and then count the number of semitones away from this base value to determine how much this note needs to be shifted. Here are a few examples:
+
+- C#4 - this note is one semitone above C4 so its note value is one and we can shift it up 100 cents.
+- B#3 - this note is one semitone below C4 so we can shift it down 100 cents.
+- F4 - this note is 6 semitones above C4 so we can shift it up 600 cents.
+
+Here's the full scale with note names and values:
+
+```
+-7  -6  -5  -4  -3  -2  -1   0  1   2  3   4  5   6
+F#   G   G#  A   A#  B   B#  C  C#  D  D#  E  E#  F
+```
+
+The Web Audio API provides a [detune](https://developer.mozilla.org/en-US/docs/Web/API/AudioBufferSourceNode/detune) property on the AudioBufferSourceNode to make it easy to shift the pitch of a sample. Here's an example of how it works:
+
+```ts
+  playTone(noteValue: number, sample: AudioBuffer) {
+    const source = audioContext.createBufferSource();
+    // use the best of a C note based on the octave and note value
+    source.buffer = sample;
+
+    // use the note value to calculate how many cents to detune the note by
+    source.detune.value = noteValue * 100;
+
+    source.connect(audioContext.destination);
+    source.start(0);
+  }
+```
+
+Unfortunately, some older web browsers do not support this detune property. Luckily, we can use the playbackRate to shift the pitch as a fallback. I learned this technique from [Tuomas's excellent blog post about Pitch Shifting](https://zpl.fi/pitch-shifting-in-web-audio-api/). So we can tweak our `playTone()` function to include this fallback for older versions of Safari:
+
+```ts
+  playTone(noteValue: number, sample: AudioBuffer) {
+    const source = audioContext.createBufferSource();
+    source.buffer = sample;
+
+    // first try to use the detune property for pitch shifting
+    if (source.detune) {
+      source.detune.value = noteValue * 100;
+    } else {
+      // fallback to using playbackRate for pitch shifting
+      source.playbackRate.value = 2 ** (noteValue / 12);
+    }
+
+    source.connect(audioContext.destination);
+    source.start(0);
+  }
+```
+
+I made sure to write some unit tests around this logic to ensure that I'm doing the math right and choosing the right sample and note value to play. You can see these unit tests here: https://github.com/gregjopa/piano-flash-cards/blob/main/src/audio.test.ts
+
+```ts
+// playNote(noteValue, octave)
+
+// B4 should use sample C5 for the best sound with pitch shifting
+test("B4", () => {
+  audioPlayer.playNote(11, 4);
+  expect(mockedPlayTone.mock.calls[0]).toEqual([-1, mockedSamples.C5]);
+});
+
+// G6 should use sample C7 for the best sound with pitch shifting
+test("G6", () => {
+  audioPlayer.playNote(7, 6);
+  expect(mockedPlayTone.mock.calls[0]).toEqual([-5, mockedSamples.C7]);
+});
+```
+
+### Playing Chords to communicate Success and Failure
+
+One fun thing I wanted to do was use sound to help reinforce when a guess was successful or not. A power chord is a happy sounding chord, so I play that when the user guesses the right note. So, if the user successfully guesses C, I'll play that C note, a fifth above which is G, and then the C note an octave above or below.
+
+For an incorrect guess I wanted to use the most off-putting chord possible, so I chose a diminished chord. So, if the user guessed wrong for a C note, I'll play that C note, a minor third above which is Eb, and a diminished fifth which would be Gb.
+
+### Learnings
+
+There are a couple things I learned when implementing this behavior with the Web Audio API:
+
+1. You cannot play audio until the user clicks on something on your webpage. The audio clock is technically suspended until this user interaction happens. I guarded against this by using the [resume](https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/resume) feature of the AudioContext like so:
+
+```js
+// ensure the audioContext is active before playing sound
+audioContext.resume().then(() => {
+  source.start(0);
+});
+```
+
+2. AudioBuffers are designed to be stored in memory. The audio samples are only a few seconds long. So, the best user experience is to load all the audio samples on page load and then reference them from memory when needed.
+
+### Final Thoughts
+
+I had a blast adding audio to this application. Please give it a try and share your thoughts on the [GitHub repo](https://github.com/gregjopa/piano-flash-cards)!
