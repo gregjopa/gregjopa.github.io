@@ -73,10 +73,10 @@ The Web Audio API provides a [detune](https://developer.mozilla.org/en-US/docs/W
 ```ts
   playTone(noteValue: number, sample: AudioBuffer) {
     const source = audioContext.createBufferSource();
-    // use the best of a C note based on the octave and note value
+    // use the best C note sample based on the octave and note value
     source.buffer = sample;
 
-    // use the note value to calculate how many cents to detune the note by
+    // use the note value to calculate how many cents to detune the note
     source.detune.value = noteValue * 100;
 
     source.connect(audioContext.destination);
